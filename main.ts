@@ -18,6 +18,10 @@ function resolveOutputDir(): string {
 }
 
 function main(): void {
+  // The letter must be exactly one line: no line breaks anywhere in it.
+  if (ENTRY.includes("\n") || ENTRY.includes("\r")) {
+    throw new Error("Entry must be a single line, but it contains a line break.");
+  }
   if (ENTRY.length > MAX_ENTRY_CHARS) {
     throw new Error(
       `Entry is ${ENTRY.length} characters, over the ${MAX_ENTRY_CHARS} limit.`,
